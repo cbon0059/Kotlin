@@ -28,6 +28,7 @@ version = "2019.1"
 project {
 
     buildType(Build)
+    description = "abc 123 testing"
 }
 
 object Build : BuildType({
