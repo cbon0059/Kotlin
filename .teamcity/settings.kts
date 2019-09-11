@@ -32,7 +32,7 @@ project {
 
 object Build : BuildType({
     name = "Build"
-
+    description = "testing the description"
     vcs {
         root(DslContext.settingsRoot)
     }
