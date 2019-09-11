@@ -50,13 +50,7 @@ object Build : BuildType({
       echo "##teamcity[buildNumber '${"$"}BUILD_NUMBER']"
       """.trimIndent()
     }
-    script {
-    name = "build"
-    scriptContent = """
-      mkdir bin
-      echo "built artifact" > bin/compiled.txt
-      """.trimIndent()
-    }
+   
     }
 
     vcs {
