@@ -37,28 +37,28 @@ object Build : BuildType({
     name = "Build"
     description = "testing the description"
 
-     id("Build")
-    steps{
-        script{
-            name = "Set Version using script"
-            scriptContent="""
-            #!/bin/bash
-            HASH=%build.vcs.number%
-            SHORT_HASH=${"$"}{HASH:0:7}
-            BUILD_COUNTER=%build.counter%
-            BUILD_NUMBER="1.0${"$"}BUILD_COUNTER.${"$"}SHORT_HASH"
-            echo "##teamcity[buildNumber '${"$"}BUILD_NUMBER']"
-             """.trimIndent()
-        }
-        script{
-            name = "build"
-            scriptContent = """
-            mkdir bin
-            echo "build artifact " > bin/compiled.txt
-            """.trimIndent()
-        }
+    id("Build")
+    steps {
+    script {
+    name = "Set version using script"
+    scriptContent = """
+      #!/bin/bash
+      HASH=%build.vcs.number%
+      SHORT_HASH=${"$"}{HASH:0:7}
+      BUILD_COUNTER=%build.counter%
+      BUILD_NUMBER="1.0${"$"}BUILD_COUNTER.${"$"}SHORT_HASH"
+      echo "##teamcity[buildNumber '${"$"}BUILD_NUMBER']"
+      """.trimIndent()
     }
-    
+    script {
+    name = "build"
+    scriptContent = """
+      mkdir bin
+      echo "built artifact" > bin/compiled.txt
+      """.trimIndent()
+    }
+    }
+
     vcs {
         root(DslContext.settingsRoot)
     }
