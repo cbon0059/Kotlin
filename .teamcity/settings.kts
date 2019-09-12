@@ -37,6 +37,12 @@ object Build : BuildType({
     name = "Build"
     description = "testing the description"
 
+    params{
+        password("variable123",
+        "credentialsJSON:67e5491f-05d5-45ad-8b9c-6bb3d3218bf4",
+        display = ParameterDisplay.HIDDEN)
+    }
+
     id("Build")
     steps {
         script {
@@ -49,7 +55,14 @@ object Build : BuildType({
                 BUILD_NUMBER="1.0${"$"}BUILD_COUNTER.${"$"}SHORT_HASH"
                 echo "##teamcity[buildNumber '${"$"}BUILD_NUMBER']"
                 """.trimIndent()
-     }
+        }
+        script {
+            name = "build"
+            scriptContent = """
+                mkdir bin
+                echo "built artifact" > bin/compiled.txt
+                """.trimIndent()
+        }
     }
 
     vcs {
