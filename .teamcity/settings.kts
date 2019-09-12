@@ -63,6 +63,9 @@ object Build : BuildType({
                 echo "built artifact" > bin/compiled.txt
                 """.trimIndent()
         }
+        maven{
+            goals = "clean test"
+        }
     }
 
     vcs {
